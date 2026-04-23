@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Azure Blue palette — light mode */
+    --background: 210 20% 98%;
+    --foreground: 215 28% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 12%;
+    --primary: 206 100% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 16% 93%;
+    --secondary-foreground: 215 28% 20%;
+    --muted: 210 16% 95%;
+    --muted-foreground: 215 15% 50%;
+    --accent: 206 100% 38%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 16% 88%;
+    --input: 210 16% 88%;
+    --ring: 206 100% 38%;
+    --radius: 0.625rem;
+    --chart-1: 206 100% 38%;
+    --chart-2: 201 88% 42%;
+    --chart-3: 217 91% 60%;
+    --chart-4: 230 70% 60%;
+    --chart-5: 258 66% 55%;
+  }
+
+  .dark {
+    --background: 215 28% 8%;
+    --foreground: 210 20% 92%;
+    --card: 215 28% 11%;
+    --card-foreground: 210 20% 92%;
+    --popover: 215 28% 11%;
+    --popover-foreground: 210 20% 92%;
+    --primary: 206 88% 55%;
+    --primary-foreground: 215 28% 8%;
+    --secondary: 215 20% 16%;
+    --secondary-foreground: 210 20% 80%;
+    --muted: 215 20% 14%;
+    --muted-foreground: 215 12% 55%;
+    --accent: 206 88% 55%;
+    --accent-foreground: 215 28% 8%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 20% 20%;
+    --input: 215 20% 20%;
+    --ring: 206 88% 55%;
+    --chart-1: 206 88% 55%;
+    --chart-2: 201 78% 52%;
+    --chart-3: 217 81% 65%;
+    --chart-4: 230 60% 65%;
+    --chart-5: 258 56% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+  
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100dvh;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+
+  p, li {
+    text-wrap: pretty;
+  }
+}
+
+/* Markdown content styling */
+.markdown-content {
+  @apply text-sm leading-relaxed;
+}
+
+.markdown-content h1 {
+  @apply text-lg font-bold mt-4 mb-2 text-foreground;
+}
+
+.markdown-content h2 {
+  @apply text-base font-semibold mt-4 mb-2 text-foreground;
+}
+
+.markdown-content h3 {
+  @apply text-sm font-semibold mt-3 mb-1.5 text-foreground;
+}
+
+.markdown-content p {
+  @apply mb-3 text-foreground/90;
+  max-width: none;
+}
+
+.markdown-content ul {
+  @apply mb-3 pl-5 space-y-1;
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  @apply mb-3 pl-5 space-y-1;
+  list-style-type: decimal;
+}
+
+.markdown-content li {
+  @apply text-foreground/90;
+  max-width: none;
+}
+
+.markdown-content code {
+  @apply font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded;
+}
+
+.markdown-content pre {
+  @apply bg-muted rounded-lg p-4 mb-3 overflow-x-auto;
+}
+
+.markdown-content pre code {
+  @apply bg-transparent p-0 text-foreground;
+}
+
+.markdown-content a {
+  @apply text-primary underline underline-offset-2 hover:text-primary/80 transition-colors;
+  word-break: break-all;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-primary/40 pl-4 my-3 text-muted-foreground italic;
+}
+
+.markdown-content strong {
+  @apply font-semibold text-foreground;
+}
+
+.markdown-content hr {
+  @apply border-border my-4;
+}
+
+.markdown-content table {
+  @apply w-full mb-3 text-xs border-collapse;
+}
+
+.markdown-content th {
+  @apply bg-muted font-semibold text-left px-3 py-2 border border-border;
+}
+
+.markdown-content td {
+  @apply px-3 py-2 border border-border;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/30;
+}
+
+/* SSE streaming cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.streaming-cursor::after {
+  content: '▋';
+  @apply text-primary;
+  animation: blink 0.7s infinite;
+  margin-left: 2px;
+}
+
+/* Sidebar transition */
+.sidebar-enter {
+  animation: slideIn 0.2s ease-out;
+}
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}

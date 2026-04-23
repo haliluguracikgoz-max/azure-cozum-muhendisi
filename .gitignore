@@ -1,0 +1,6 @@
+node_modules/
+dist/
+azure_assistant.db
+*.db
+.env
+.DS_Store
